@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mission to Mars</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  ​<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href='/static/style.css'>
+  <!--"{{ url_for('static', filename='style.css') }}"-->
+</head> 
+
+<body>
+  <div class="container">
+    <div class="jumbotron bg-dark text-warning text-center">
+      <h1>Mission to Mars</h1>
+      <p>Latest News about Mars</p>
+      <p><a class="btn btn-warning btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+          <div class="box border bg-light border-dark rounded m-2 p-0">
+            <div class="h3 bg-dark text-warning p-2">
+              <i class="fas fa-rss-square"></i> Latest Mars News:
+            </div>
+            <div class="h3 pl-2">{{ mars.news_title }} :</div>
+            <div class="p ml-2 pb-2">{{ mars.news_p }}</div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+          <div class="box border bg-dark text-white border-dark rounded m-2 p-2">
+            <div class="h3 text-warning">
+              <i class="fas fa-image"></i> Featured Mars Image
+            </div>
+            <img class="img-fluid img-thumbnail rounded-lg" src="{{ mars.featured_image_url }}" alt="featured image">
+            <div class="p">
+              {{ mars.description }}
+            </div>
+          </div>
+      </div>
+      <div class="col-md-4">
+        <div class="box border rounded-lg border-warning bg-dark m-2 p-0">
+          <div class="h4 bg-dark text-warning p-2">
+            <i class="fas fa-cloud-sun-rain"></i> Current Weather on Mars
+          </div>
+          <div class="text-justify bg-light p-2">
+            <i class="text-primary fab fa-twitter"></i> {{ mars.mars_weather }}
+          </div>
+        </div>
+        <div class="box border bg-dark border-warning rounded-lg m-2 p-1">
+          <div class="h4 text-warning text-center">
+            <i class="fas fa-info-circle"></i> Mars Facts
+          </div>
+        
+          <table class="table-striped table-dark table-hover table-bordered table-sm">
+          <thead class="bg-warning text-dark text-center"> <tr> 
+            {{ mars.table|safe }}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="box border rounded border-warning bg-dark m-2 p-4">
+        <div class="col-md-12 bg-dark">
+          <div class="text-center h3 bg-dark text-warning">
+            <i class="fas fa-globe"></i> Mars Hemispheres
+          </div>
+        </div>      
+        <div class="row">
+          {% for i in mars.hemispheres %}
+          <div class="col-md-6 bg-dark pb-3 p-1">        
+            <div class="h3 text-center p-1 mt-2 m-0 bg-dark text-white">
+              {{i['title']}}
+            </div>
+            <img src="{{i['img_url']}}" class="rounded" width=100%>
+          </div>
+          {% endfor %}
+        </div> 
+      </div>
+    </div>
+  </div> 
+</body>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</html>
